@@ -14,6 +14,16 @@ public class Main {
         stmt.execute("UPDATE players SET health = 50 WHERE name = 'Alice'");
         stmt.execute("DELETE FROM players WHERE name = 'Bob'");
 
+        // BAD, this method is vulnerable to a SQL insertion attack
+        //String input = "Charlie";
+        //stmt.execute(String.format("INSERT INTO players VALUES ('%s', 100, 10, true)", input));
+
+        // GOOD
+        String input = "Charlie";
+        PreparedStatement stmt2 = conn.prepareStatement("INSERT INTO players VALUES (?, 100, 10, true)");
+        stmt2.setString(1, input);
+        stmt2.execute();
+
         ResultSet results = stmt.executeQuery("SELECT * FROM players");
         while (results.next()) {
             String name = results.getString("name");

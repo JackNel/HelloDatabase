@@ -14,7 +14,7 @@ public class Main {
         stmt.execute("UPDATE players SET health = 50 WHERE name = 'Alice'");
         stmt.execute("DELETE FROM players WHERE name = 'Bob'");
 
-        // BAD, this method is vulnerable to a SQL insertion attack
+        // BAD, this method is vulnerable to a SQL injection attack
         //String input = "Charlie";
         //stmt.execute(String.format("INSERT INTO players VALUES ('%s', 100, 10, true)", input));
 
